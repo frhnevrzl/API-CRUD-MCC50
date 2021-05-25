@@ -26,7 +26,7 @@ namespace API.Controllers
             var post = repo.Insert(Persons);
             if (post > 0)
             {
-                return Ok();
+                return Ok("Data Inserted Successfully");
             }
             else
                 return BadRequest("You Didn't Insert Anything");
@@ -58,7 +58,7 @@ namespace API.Controllers
             var del = repo.Delete(nik);
             if (del > 0)
             {
-                return Ok(del);
+                return Ok($"Record Deleted SuccessFully");
             }
             else
                 return NotFound("Data Not Found");
@@ -70,7 +70,7 @@ namespace API.Controllers
             var put = repo.Update(Persons);
             if (put > 0)
             {
-                return Ok(put);
+                return Ok("Record Changed");
             }
             else
                 return BadRequest("Record Not Match");

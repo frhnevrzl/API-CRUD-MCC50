@@ -5804,11 +5804,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\TestCode\\API\\API\\API.csproj",
+      "projectUniqueName": "D:\\TestCode\\API\\API-CRUD-MCC50\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\TestCode\\API\\API\\API.csproj",
+      "projectPath": "D:\\TestCode\\API\\API-CRUD-MCC50\\API\\API.csproj",
       "packagesPath": "C:\\Users\\My Leppy\\.nuget\\packages\\",
-      "outputPath": "D:\\TestCode\\API\\API\\obj\\",
+      "outputPath": "D:\\TestCode\\API\\API-CRUD-MCC50\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\My Leppy\\AppData\\Roaming\\NuGet\\NuGet.Config",
