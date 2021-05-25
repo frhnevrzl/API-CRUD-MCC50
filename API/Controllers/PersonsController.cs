@@ -73,7 +73,7 @@ namespace API.Controllers
                 return Ok("Record Changed");
             }
             else
-                return BadRequest("Record Not Match");
+                return NotFound("Record Not Match");
         }
     }
 }
