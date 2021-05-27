@@ -1,5 +1,4 @@
-﻿using API.Models;
-using API.Repository;
+﻿using API.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,33 +6,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.Controllers
+namespace API.Base
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class BaseController<Entity, Repository, Key> : ControllerBase
+        where Entity : class where Repository : IRepository<Entity, Key>
     {
-        PersonRepository repo;
-
-        public PersonsController(PersonRepository repo)
+        Repository repo;
+        public BaseController(Repository repo)
         {
             this.repo = repo;
         }
 
         [HttpPost]
-        public ActionResult Post(Person Persons)
+        public ActionResult Post(Entity entity)
         {
-            var post = repo.Insert(Persons);
+            var post = repo.Insert(entity);
             if (post > 0)
             {
                 return Ok("Data Inserted Successfully");
             }
             else
                 return BadRequest("You Didn't Insert Anything");
-
         }
+
         [HttpGet]
-        public ActionResult Get()
+        public ActionResult<Entity> Get()
         {
             var get = repo.Get();
             if (get != null)
@@ -41,39 +40,37 @@ namespace API.Controllers
                 return Ok(get);
             }
             else
-                return NotFound("You Don't Have a Record in The Table Yet");
-
+                return NotFound("No Record");
         }
 
-        [HttpGet("{nik}")]
-        public ActionResult Get(int nik)
+        [HttpGet("{key}")]
+        public ActionResult Get(Key key)
         {
-            var get = repo.Get(nik);
+            var get = repo.Get(key);
             if (get != null)
             {
                 return Ok(get);
             }
             else
-                return NotFound("There is No Matching Record");
-
+                return NotFound("No Record");
         }
 
-        [HttpDelete("{nik}")]
-        public ActionResult Delete(int nik)
+        [HttpDelete("{key}")]
+        public ActionResult Delete(Key key)
         {
-            var del = repo.Delete(nik);
+            var del = repo.Delete(key);
             if (del > 0)
             {
-                return Ok($"Record Deleted SuccessFully");
+                return Ok("Data Deleted Successfully");
             }
             else
                 return NotFound("Data Not Found");
         }
 
         [HttpPut]
-        public ActionResult Put(Person Persons)
+        public ActionResult Update(Entity entity)
         {
-            var put = repo.Update(Persons);
+            var put = repo.Update(entity);
             if (put > 0)
             {
                 return Ok("Record Changed");
@@ -82,4 +79,5 @@ namespace API.Controllers
                 return NotFound("Record Not Match");
         }
     }
+
 }
