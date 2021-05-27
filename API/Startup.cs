@@ -31,6 +31,10 @@ namespace API
             services.AddControllers();
             //Agar bisa dijalankan startup harus ditambah/register addscope tiap repository
             services.AddScoped<PersonRepository>();
+            services.AddScoped<AccountRepository>();
+            services.AddScoped<EducationRepository>();
+            services.AddScoped<UniversityRepository>();
+            services.AddScoped<ProfilingRepository>();
             //harus install nuget package console
             //Install-Package Microsoft.EntityFrameworkCore.SqlServer
             //Install-Package Microsoft.EntityFrameworkCore.Design
