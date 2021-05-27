@@ -36,7 +36,13 @@ namespace API.Controllers
         public ActionResult Get()
         {
             var get = repo.Get();
-            return Ok(get);
+            if (get != null)
+            {
+                return Ok(get);
+            }
+            else
+                return NotFound("You Don't Have a Record in The Table Yet");
+
         }
 
         [HttpGet("{nik}")]

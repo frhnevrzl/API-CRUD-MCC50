@@ -54,7 +54,7 @@ namespace API.Repository
             int isUpdated = 0;
             if (person != null)
             {
-                Conn.Entry<Person>(person).State = EntityState.Modified;
+                Conn.Entry(person).State = EntityState.Modified;
                 Conn.SaveChanges();
                 isUpdated = 1;
             }
