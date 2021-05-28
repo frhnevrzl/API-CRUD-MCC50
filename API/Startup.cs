@@ -28,7 +28,12 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //services.AddControllers();
+            // Untuk Lazy Loading
+            //Install newtonsoft json 3.1.12
+            services.AddControllers()
+            .AddNewtonsoftJson(options =>
+             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             //Agar bisa dijalankan startup harus ditambah/register addscope tiap repository
             services.AddScoped<PersonRepository>();
             services.AddScoped<AccountRepository>();
@@ -39,12 +44,16 @@ namespace API
             //Install-Package Microsoft.EntityFrameworkCore.SqlServer
             //Install-Package Microsoft.EntityFrameworkCore.Design
             //Install - Package Microsoft.EntityFrameworkCore.Tools
-            services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ApiContext")));
+            //services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ApiContext")));
             //Tiap ada Perubahan harus melakukan
             //Command di Nuget:
             //Enable-Migrations
             //Add-Migrations  ->commit name
             //update-database
+
+            //LazyLoading
+            services.AddDbContext<MyContext>(options => options.UseLazyLoadingProxies()
+                .UseSqlServer(Configuration.GetConnectionString("ApiContext")));
         }
 
         private void options(DbContextOptionsBuilder obj)

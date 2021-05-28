@@ -11,7 +11,6 @@ namespace API.Models
     public class Profiling
     {
         [Key]
-        //[ForeignKey("Account")]
         public int NIK { get; set; }
         //FK tidak perlu di deklarasikan jika one to many
         //[ForeignKey("Education")]

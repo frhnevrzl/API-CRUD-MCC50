@@ -13,9 +13,9 @@ namespace API.Models
         [Key]
         public int UniversityId { get; set; }
         public string UniversityName { get; set; }
-
+        public virtual ICollection<Education> education { get; set; }
         //public Education education { get; set; }
         //kalau Many pakai Icollection
-        public ICollection<Education> education { get; set; }
+
     }
 }
