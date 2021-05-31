@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class Add_relations : Migration
+    public partial class add_table : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,7 +64,7 @@ namespace API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Degree = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GPA = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UniversityId = table.Column<int>(type: "int", nullable: true)
+                    UniversityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,7 +74,7 @@ namespace API.Migrations
                         column: x => x.UniversityId,
                         principalTable: "TB_M_University",
                         principalColumn: "UniversityId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,7 +82,7 @@ namespace API.Migrations
                 columns: table => new
                 {
                     NIK = table.Column<int>(type: "int", nullable: false),
-                    EducationId = table.Column<int>(type: "int", nullable: true)
+                    EducationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,7 +98,7 @@ namespace API.Migrations
                         column: x => x.EducationId,
                         principalTable: "TB_M_Education",
                         principalColumn: "EducationId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

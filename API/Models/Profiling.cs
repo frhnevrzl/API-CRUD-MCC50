@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,8 +15,9 @@ namespace API.Models
         public int NIK { get; set; }
         //FK tidak perlu di deklarasikan jika one to many
         //[ForeignKey("Education")]
-        //public int EducationId { get; set; }
         public virtual Account account { get; set; }
+        [JsonIgnore]
         public virtual Education education { get; set; }
+        public int EducationId { get; set; }
     }
 }

@@ -25,13 +25,25 @@ namespace API.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Person>().HasOne(p => p.account).WithOne(a => a.person)
+            modelBuilder.Entity<Person>()
+                .HasOne(p => p.account)
+                .WithOne(a => a.person)
                 .HasForeignKey<Account>(a => a.NIK);
-            modelBuilder.Entity<Account>().HasOne(a => a.profiling).WithOne(p => p.account)
+        
+            modelBuilder.Entity<Account>()
+                .HasOne(a => a.profiling)
+                .WithOne(p => p.account)
                 .HasForeignKey<Profiling>(p => p.NIK);
             //Many otomatis gausah pake .HasForeignKey<Profiling>(p => p.NIK);
-            modelBuilder.Entity<Education>().HasMany(e => e.profiling).WithOne(p => p.education);
-            modelBuilder.Entity<University>().HasMany(u => u.education).WithOne(e => e.university);
+           // modelBuilder.Entity<Profiling>().HasOne(p => p.education).WithMany(e => e.profiling);
+            modelBuilder.Entity<Education>()
+                .HasMany(e => e.profiling)
+                .WithOne(p => p.education);
+
+            modelBuilder.Entity<University>()
+                .HasMany(u => u.education)
+                .WithOne(e => e.university);
+            
 
         }
     }

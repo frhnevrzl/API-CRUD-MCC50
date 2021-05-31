@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210527063858_Add_relations")]
-    partial class Add_relations
+    [Migration("20210531040327_add_jsonignore")]
+    partial class add_jsonignore
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,7 +47,7 @@ namespace API.Migrations
                     b.Property<string>("GPA")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UniversityId")
+                    b.Property<int>("UniversityId")
                         .HasColumnType("int");
 
                     b.HasKey("EducationId");
@@ -92,7 +92,7 @@ namespace API.Migrations
                     b.Property<int>("NIK")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EducationId")
+                    b.Property<int>("EducationId")
                         .HasColumnType("int");
 
                     b.HasKey("NIK");
@@ -132,7 +132,9 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Models.University", "university")
                         .WithMany("education")
-                        .HasForeignKey("UniversityId");
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("university");
                 });
@@ -141,7 +143,9 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Models.Education", "education")
                         .WithMany("profiling")
-                        .HasForeignKey("EducationId");
+                        .HasForeignKey("EducationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.Models.Account", "account")
                         .WithOne("profiling")

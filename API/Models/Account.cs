@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,8 +16,10 @@ namespace API.Models
         //[ForeignKey("Person")]
         public int NIK { get; set; }
         public string Password { get; set; }
-
-        public virtual Person person { get; set; }
         public virtual Profiling profiling { get; set; }
+
+        [JsonIgnore]
+        public virtual Person person { get; set; }
+        
     }
 }

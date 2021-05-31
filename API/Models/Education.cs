@@ -17,9 +17,9 @@ namespace API.Models
         public string GPA { get; set; }
         //[ForeignKey("University")]
         //FK tidak perlu di deklarasikan jika one to many
-        //public int UniversityId { get; set; }
         //public Profiling profiling { get; set; }
         public virtual ICollection<Profiling> profiling { get; set; }
         public virtual University university { get; set; }
+        public int UniversityId { get; set; }
     }
 }
