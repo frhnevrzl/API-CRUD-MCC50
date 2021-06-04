@@ -39,7 +39,7 @@ namespace API.Controllers
 
         //[Route("GetProfile")]
         //[Authorize(Roles = "Admin")]
-        
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetProfile")]
         [EnableCors("AllowOrigin")]
         public ActionResult Profile()
@@ -66,7 +66,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Login")]
-        [Route("Login")]
+        //[Route("Login")]
         public ActionResult Login(RegisterVM register)
         {
             var post = repo.Login(register);

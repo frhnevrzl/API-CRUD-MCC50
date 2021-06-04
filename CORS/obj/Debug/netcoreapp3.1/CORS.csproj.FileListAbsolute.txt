@@ -35,3 +35,8 @@ D:\TestCode\API\API-CRUD-MCC50\CORS\obj\Debug\netcoreapp3.1\CORS.dll
 D:\TestCode\API\API-CRUD-MCC50\CORS\obj\Debug\netcoreapp3.1\CORS.pdb
 D:\TestCode\API\API-CRUD-MCC50\CORS\obj\Debug\netcoreapp3.1\CORS.genruntimeconfig.cache
 D:\TestCode\API\API-CRUD-MCC50\CORS\obj\Debug\netcoreapp3.1\CORS.csproj.CopyComplete
+D:\TestCode\API\API-CRUD-MCC50\CORS\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\TestCode\API\API-CRUD-MCC50\CORS\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\TestCode\API\API-CRUD-MCC50\CORS\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\TestCode\API\API-CRUD-MCC50\CORS\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\TestCode\API\API-CRUD-MCC50\CORS\obj\Debug\netcoreapp3.1\CORS.MvcApplicationPartsAssemblyInfo.cs

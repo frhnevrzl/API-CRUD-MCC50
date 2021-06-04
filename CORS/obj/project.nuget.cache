@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "GusYOQjSL8+H6KcFEGbhYbu8RY/CMvYlgL7EzfUGmP3NjHP9zPquMm9k5akm6nRw5Cli+5j4sxGobQ64enZa5w==",
+  "dgSpecHash": "fIyf/+7qrsYz0CwxPyVzR6AYQmMHRBkhC8PgMwLHtKMoE/FqHfiadLaYOoz/5ztRdRLaHVmiSzR0UgNsR5gmhg==",
   "success": true,
   "projectFilePath": "D:\\TestCode\\API\\API-CRUD-MCC50\\CORS\\CORS.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\My Leppy\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\My Leppy\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\My Leppy\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.4\\swashbuckle.aspnetcore.6.1.4.nupkg.sha512",
+    "C:\\Users\\My Leppy\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.4\\swashbuckle.aspnetcore.swagger.6.1.4.nupkg.sha512",
+    "C:\\Users\\My Leppy\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.1.4\\swashbuckle.aspnetcore.swaggergen.6.1.4.nupkg.sha512",
+    "C:\\Users\\My Leppy\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.1.4\\swashbuckle.aspnetcore.swaggerui.6.1.4.nupkg.sha512"
+  ],
   "logs": []
 }
