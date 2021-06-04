@@ -1,5 +1,6 @@
 using API.Context;
 using API.Repository.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,9 +10,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace API
@@ -28,6 +31,15 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });*/
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44303"));
+            });
+
             //services.AddControllers();
             // Untuk Lazy Loading
             //Install newtonsoft json 3.1.12
@@ -40,6 +52,8 @@ namespace API
             services.AddScoped<EducationRepository>();
             services.AddScoped<UniversityRepository>();
             services.AddScoped<ProfilingRepository>();
+            services.AddScoped<RoleRepository>();
+            services.AddScoped<AccountRoleRepository>();
             //harus install nuget package console
             //Install-Package Microsoft.EntityFrameworkCore.SqlServer
             //Install-Package Microsoft.EntityFrameworkCore.Design
@@ -54,6 +68,25 @@ namespace API
             //LazyLoading
             services.AddDbContext<MyContext>(options => options.UseLazyLoadingProxies()
                 .UseSqlServer(Configuration.GetConnectionString("ApiContext")));
+
+            services.AddAuthentication(auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
+
         }
 
         private void options(DbContextOptionsBuilder obj)
@@ -72,6 +105,11 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            //app.UseCors(options => options.AllowAnyOrigin());
+            app.UseCors(options => options.WithOrigins("https://localhost:44303"));
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

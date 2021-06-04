@@ -1,4 +1,5 @@
 ﻿using API.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,6 +20,7 @@ namespace API.Base
             this.repo = repo;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Post(Entity entity)
         {
@@ -31,6 +33,7 @@ namespace API.Base
                 return BadRequest("You Didn't Insert Anything");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult<Entity> Get()
         {
@@ -43,6 +46,7 @@ namespace API.Base
                 return NotFound("No Record");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{key}")]
         public ActionResult Get(Key key)
         {
@@ -55,6 +59,7 @@ namespace API.Base
                 return NotFound("No Record");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{key}")]
         public ActionResult Delete(Key key)
         {
@@ -67,6 +72,7 @@ namespace API.Base
                 return NotFound("Data Not Found");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public ActionResult Update(Entity entity)
         {

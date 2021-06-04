@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using API.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,9 @@ namespace API.Context
         public DbSet<Profiling> Profilings { get; set; }
         public DbSet<Education> Educations { get; set; }
         public DbSet<University> Universities { get; set; }
-
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<AccountRole> AccountRoles { get; set; }
+        public DbSet<RegisterVM> RegisterVM { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Person>()
@@ -43,7 +46,25 @@ namespace API.Context
             modelBuilder.Entity<University>()
                 .HasMany(u => u.education)
                 .WithOne(e => e.university);
+            modelBuilder.Entity<AccountRole>().HasKey(ar => new { ar.AccountNIK, ar.RoleId });
+
+            modelBuilder.Entity<Account>()
+                .HasMany(a => a.AccountRoles)
+                .WithOne(a => a.Account);
+
+            modelBuilder.Entity<Role>()
+                .HasMany(r => r.AccountRoles)
+                .WithOne(r => r.Roles);
+
+            /* modelBuilder.Entity<Role>()
+                 .HasMany(r => r.AccountRoles)
+                 .WithMany(a => a.Role);*/
+
+            /* modelBuilder.Entity<Account>()
+                 .HasOne(a => a.Acco)
+                 .WithOne(a => a.Account);*/
             
+            modelBuilder.Entity<RegisterVM>().HasNoKey();
 
         }
     }
