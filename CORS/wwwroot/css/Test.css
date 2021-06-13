@@ -1,0 +1,87 @@
+﻿/*h1{
+    background-color : red;
+    display : inline-block;
+    width : 100px;
+    height : 100px;
+}
+
+h2{
+    background-color : blue;
+}
+
+p{
+    display : block;
+}
+
+a{
+    display:inline-block;
+    background-color : salmon;
+    width : 125px;
+    height : 125px;
+}
+
+.satu{
+    background-color : salmon;
+    height : 200px;
+    width : 200px;
+    position : static;
+}
+.dua {
+    float : right;
+    background-color: lawngreen;
+    height: 150px;
+    width: 150px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    padding: 5px;
+}
+.tiga{
+    top : 20px;
+    left : 70px;
+    background-color : aquamarine;
+    height : 100px;
+    width : 100px;
+    position :relative;
+}
+.empat {
+    left : 150px;
+    background-color: yellow;
+    height: 50px;
+    width: 50px;
+    position : fixed;
+}
+
+.kotak{
+    border : 1px solid red;
+}
+
+p{
+    font : 100;
+    font-family : fantasy;
+}*/
+
+/**{
+    border : 2px solid #808080;
+    padding : 15px;
+    margin : 15px;
+}
+html{
+    margin : 0;
+    padding : 0;
+}
+body{
+    max-width : 800px;
+    margin : 15px auto;
+}
+
+section#b #a ul li:nth-child(2):hover{
+    background-color : salmon;
+}
+
+section#a .p1:hover{
+    background-color : salmon;
+}
+#c{
+    background-color : red;
+}*/

@@ -20,7 +20,7 @@ namespace API.Base
             this.repo = repo;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Post(Entity entity)
         {

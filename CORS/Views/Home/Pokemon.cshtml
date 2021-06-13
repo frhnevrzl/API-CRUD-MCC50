@@ -1,0 +1,34 @@
+﻿<h1>Pokemon</h1>
+
+<table id="tablePoke" class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Nama</th>
+            <th>Url</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="bodyPoke">
+
+    </tbody>
+</table>
+<div class="modal fade" id="modalPoke" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pokemon Details</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="bodyModal">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/js/Pokemon.js" asp-append-version="true"></script>
+ }

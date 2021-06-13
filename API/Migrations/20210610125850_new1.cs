@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class @new : Migration
+    public partial class new1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,7 +21,8 @@ namespace API.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Degree = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GPA = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UniversityId = table.Column<int>(type: "int", nullable: false)
+                    UniversityId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,20 +115,18 @@ namespace API.Migrations
                 name: "TB_N_AccountRole",
                 columns: table => new
                 {
-                    NIK = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<int>(type: "int", nullable: false),
-                    AccountNIK = table.Column<int>(type: "int", nullable: true)
+                    AccountNIK = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_N_AccountRole", x => x.NIK);
+                    table.PrimaryKey("PK_TB_N_AccountRole", x => new { x.AccountNIK, x.RoleId });
                     table.ForeignKey(
                         name: "FK_TB_N_AccountRole_TB_M_Account_AccountNIK",
                         column: x => x.AccountNIK,
                         principalTable: "TB_M_Account",
                         principalColumn: "NIK",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TB_N_AccountRole_TB_M_Role_RoleId",
                         column: x => x.RoleId,
@@ -164,11 +163,6 @@ namespace API.Migrations
                 name: "IX_TB_M_Education_UniversityId",
                 table: "TB_M_Education",
                 column: "UniversityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TB_N_AccountRole_AccountNIK",
-                table: "TB_N_AccountRole",
-                column: "AccountNIK");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_N_AccountRole_RoleId",

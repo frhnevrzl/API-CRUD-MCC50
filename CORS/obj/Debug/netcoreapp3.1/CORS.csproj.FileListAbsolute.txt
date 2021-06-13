@@ -40,3 +40,6 @@ D:\TestCode\API\API-CRUD-MCC50\CORS\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCo
 D:\TestCode\API\API-CRUD-MCC50\CORS\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\TestCode\API\API-CRUD-MCC50\CORS\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\TestCode\API\API-CRUD-MCC50\CORS\obj\Debug\netcoreapp3.1\CORS.MvcApplicationPartsAssemblyInfo.cs
+D:\TestCode\API\API-CRUD-MCC50\CORS\obj\Debug\netcoreapp3.1\Razor\Views\Home\Test.cshtml.g.cs
+D:\TestCode\API\API-CRUD-MCC50\CORS\obj\Debug\netcoreapp3.1\Razor\Views\Home\Pokemon.cshtml.g.cs
+D:\TestCode\API\API-CRUD-MCC50\CORS\obj\Debug\netcoreapp3.1\Razor\Views\Home\Person.cshtml.g.cs

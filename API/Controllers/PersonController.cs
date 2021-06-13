@@ -25,6 +25,7 @@ namespace API.Controllers
             this.repo = person;
         }
 
+        [EnableCors("AllowOrigin")]
         [HttpPost("{Register}")]
         public ActionResult Register(RegisterVM register)
         {
@@ -39,7 +40,7 @@ namespace API.Controllers
 
         //[Route("GetProfile")]
         //[Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("GetProfile")]
         [EnableCors("AllowOrigin")]
         public ActionResult Profile()
@@ -52,7 +53,7 @@ namespace API.Controllers
             else
                 return NotFound("No Record");
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("GetProfileById/{nik}")]
         public ActionResult GetProfileById(int nik)
         {

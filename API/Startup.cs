@@ -32,14 +32,15 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /*services.AddCors(c =>
-            {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
-            });*/
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44303"));
+                //c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44303").AllowAnyMethod().AllowCredentials().AllowAnyHeader());
             });
+            //services.AddCors(c =>
+            //{
+            //    c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44303"));
+            //});
 
             //services.AddControllers();
             // Untuk Lazy Loading

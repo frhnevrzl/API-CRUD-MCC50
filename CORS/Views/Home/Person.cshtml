@@ -1,0 +1,117 @@
+﻿<h1>PERSON</h1>
+<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#modalRegister">Register</button>
+<div class="container container-fluid">
+    <table id="tablePerson" class="table table-responsive table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>NIK</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Birth Date</th>
+                <th>Action</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="bodyPerson">
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="modalRegister" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="bodyMRegister">
+                <form id="formPersonReg" action="javascript:Insert()">
+                    <div class="row">
+                        <div class="col-6 my-1">
+                            <label for="InputFirstName" class="col-form-label">First Name</label>
+                            <input type="text" class="form-control" id="inputFirstName" aria-describedby="firstnameHelp" required>
+                            <div id="firstnameHelp" class="form-text"></div>
+                        </div>
+                        <div class="col-6 my-1">
+                            <label for="InputLastName" class="col-form-label">Last Name</label>
+                            <input type="text" class="form-control" id="inputLastName" aria-describedby="lastnameHelp" required>
+                            <div id="lastnameHelp" class="form-text"></div>
+                        </div>
+                        <div class="col-6 my-1">
+                            <label for="InputPhone" class="col-form-label">Phone</label>
+                            <input type="text" class="form-control" id="inputPhone" aria-describedby="phoneHelp" required>
+                            <div id="phoneHelp" class="form-text"></div>
+                        </div>
+                        <div class="col-6 my-1">
+                            <label for="InputBirthdate" class="col-form-label">Birth Date</label>
+                            <input type="date" class="form-control" id="inputBirthdate" aria-describedby="BirthdateHelp" required>
+                            <div id="BirthdateHelp" class="form-text"></div>
+                        </div>
+                        <div class="col-6 my-1">
+                            <label for="InputSalary" class="col-form-label">Salary</label>
+                            <input type="text" class="form-control" id="inputSalary" aria-describedby="salaryHelp" required>
+                            <div id="salaryHelp" class="form-text"></div>
+                        </div>
+                        <div class="col-6 my-1">
+                            <label for="InputEmail" class="col-form-label">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" required>
+                            <div id="emailHelp" class="form-text"></div>
+                        </div>
+                        <div class="col-6 my-1">
+                            <label for="InputPassword" class="col-form-label">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" minlength="6">
+                            <div id="passwordHelp" class="form-text"></div>
+                        </div>
+                        <div class="col-6 my-1">
+                            <label for="InputDegree" class="col-form-label">Degree</label>
+                            <input type="text" class="form-control" id="inputDegree" aria-describedby="degreeHelp" required>
+                            <div id="degreeHelp" class="form-text"></div>
+                        </div>
+                        <div class="col-6 my-1">
+                            <label for="InputGpa" class="col-form-label">IPK</label>
+                            <input type="number" class="form-control" id="inputGpa" aria-describedby="GpaHelp" required>
+                            <div id="GpaHelp" class="form-text"></div>
+                        </div>
+                        <div class="col-6 my-1">
+                            <label for="InputUniversityId" class="col-form-label">University</label>
+                            <input type="text" class="form-control" id="inputUniversityId" aria-describedby="universityHelp" required>
+                            <div id="universityHelp" class="form-text"></div>
+                        </div>
+                        <div class="col-6 my-1">
+                            <button id="registerBtn" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*MODAL UNTUK JS Detail*@
+<div class="modal fade" id="modalPerson" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Person Details</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="bodyMPerson">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/js/person.js" asp-append-version="true"></script>
+}
