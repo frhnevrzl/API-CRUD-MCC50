@@ -42,7 +42,7 @@ namespace API.Controllers
         //[Authorize(Roles = "Admin")]
         //[Authorize(Roles = "Admin")]
         [HttpGet("GetProfile")]
-        [EnableCors("AllowOrigin")]
+        //[EnableCors("AllowOrigin")]
         public ActionResult Profile()
         {
             var get = repo.GetProfile();
@@ -66,21 +66,57 @@ namespace API.Controllers
                 return NotFound("No Record");
         }
 
+        //[Authorize(Roles = "Admin")]
         [HttpPost("Login")]
         //[Route("Login")]
-        public ActionResult Login(RegisterVM register)
+        public ActionResult Login(LoginVM loginvm)
         {
-            var post = repo.Login(register);
-           
-            if (post > 0)
+            var login = repo.Login(loginvm);
+
+            if (login == 404)
             {
-                string token = repo.GenerateToken(register);
-                return Ok($"Berhasil Login \n Token : {token}");
-                //repo.ValidateCurrentToken(token);
+                return BadRequest("Email Belum Terdaftar");
+            }
+            else if (login == 401)
+            {
+                return BadRequest("Password Salah");
+            }
+            else if (login == 1)
+            {
+                return Ok(new JWTokenVM
+                {
+                    Token = repo.GenerateToken(loginvm),
+                    Message = "Login Sukses"
+                });
             }
             else
-                return BadRequest("Email atau Password Tidak Sesuai");
+                return BadRequest("Gagal Login");
+        }
 
+        [EnableCors("AllowOrigin")]
+        [HttpPost("DeleteProfile/{nik}")]
+        public ActionResult DeleteProfile(int nik)
+        {
+            var del = repo.DeleteProfile(nik);
+            if (del != 0)
+            {
+                return Ok("Delete Success");
+            }
+            else
+                return NotFound("No Record");
+        }
+
+        [EnableCors("AllowOrigin")]
+        [HttpPost("UpdateProfile")]
+        public ActionResult UpdateProfile(RegisterVM register)
+        {
+            var put = repo.UpdateProfile(register);
+            if (put > 0)
+            {
+                return Ok("Record Changed");
+            }
+            else
+                return NotFound("Record Not Match");
         }
         [HttpPut("ChangePassword")]
         public ActionResult ChangePassword(ChangePassVM changePass)

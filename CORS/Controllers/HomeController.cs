@@ -1,4 +1,8 @@
-﻿using CORS.Models;
+﻿using API.Models;
+using CORS.Base;
+using CORS.Models;
+using CORS.Repositories.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,16 +13,35 @@ using System.Threading.Tasks;
 
 namespace CORS.Controllers
 {
-    public class HomeController : Controller
+    [Authorize(Roles = "Admin")]
+    public class HomeController : BaseController<Person, PersonRepository, int>
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        PersonRepository repository;
+        //private readonly ILogger<HomeController> _logger;
+        
+        public HomeController(PersonRepository repository) : base(repository)
         {
-            _logger = logger;
+            this.repository = repository;
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public async Task<JsonResult> Getsemuadata()
+        {
+            var result = await repository.GetAllProfile();
+            return Json(result);
+        }
+        //[HttpGet("GetById/{nik}")]
+        public async Task<JsonResult> GetByid(int Id)
+        {
+            var result = await repository.GetById(Id);
+            return Json(result);
+        }
+
+        public IActionResult Login()
         {
             return View();
         }
@@ -27,8 +50,13 @@ namespace CORS.Controllers
         {
             return View();
         }
-
+        
         public IActionResult Pokemon()
+        {
+            return View();
+        }
+
+        public IActionResult Admin()
         {
             return View();
         }

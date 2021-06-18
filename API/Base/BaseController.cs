@@ -33,7 +33,7 @@ namespace API.Base
                 return BadRequest("You Didn't Insert Anything");
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult<Entity> Get()
         {
@@ -46,7 +46,7 @@ namespace API.Base
                 return NotFound("No Record");
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("{key}")]
         public ActionResult Get(Key key)
         {
@@ -59,7 +59,7 @@ namespace API.Base
                 return NotFound("No Record");
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{key}")]
         public ActionResult Delete(Key key)
         {
@@ -72,7 +72,7 @@ namespace API.Base
                 return NotFound("Data Not Found");
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut]
         public ActionResult Update(Entity entity)
         {

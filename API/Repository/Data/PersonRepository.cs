@@ -111,7 +111,9 @@ namespace API.Repository.Data
                            NIK = p.NIK,
                            FirstName = p.FirstName,
                            LastName = p.LastName,
+                           BirthDate = p.BirthDate,
                            Phone = p.Phone,
+                           Salary = p.Salary,
                            Email = p.Email,
                            UniversityId = u.UniversityId,
                            Degree = e.Degree,
@@ -136,29 +138,87 @@ namespace API.Repository.Data
                            NIK = p.NIK,
                            FirstName = p.FirstName,
                            LastName = p.LastName,
+                           BirthDate = p.BirthDate,
                            Phone = p.Phone,
+                           Salary = p.Salary,
                            Email = p.Email,
+                           Password = a.Password,
                            UniversityId = u.UniversityId,
                            Degree = e.Degree,
                            GPA = e.GPA
                        }).ToList();
             return get.FirstOrDefault(p=> p.NIK == nik );
         }
-        public int Login(RegisterVM register)
+        public int Login(LoginVM login)
         {
             var res = 0;
             //var search = conn.Persons.Where(p => p.Email == (register.Email) && p.account.Password == (register.Password));
-            var check = conn.Persons.Single(p => p.Email == register.Email);
+            var check = conn.Persons.FirstOrDefault(p => p.Email == login.Email);
             //var search = conn.Accounts.FirstOrDefault(a => a.NIK == check.NIK);
 
             //if (search.ToList().Count > 0)
-            if (check!=null && ValidatePassword(register.Password,check.account.Password))
+            if (check!=null && ValidatePassword(login.Password,check.account.Password))
             {
                 res = 1;
             }
             else
                 res = 0;
             return res;
+        }
+
+        public int DeleteProfile(int nik)
+        {
+            var del = conn.Persons.Find(nik);
+            if (del != null)
+            {
+                conn.Remove(del);
+                conn.SaveChanges();
+                return 1;
+            }
+            else
+                return 0;
+        }
+
+        //public int UpdateProfile(Person person)
+        //{
+        //    if (person != null)
+        //    {
+        //        conn.Entry(person).State = EntityState.Modified;
+        //        var result = conn.SaveChanges();
+        //        return result;
+        //    }
+        //    throw new ArgumentNullException("Entity");
+        //}
+        public int UpdateProfile(RegisterVM register)
+        {
+            Profiling profiling = conn.Profilings.Find(register.NIK);
+
+            Account account = conn.Accounts.Find(register.NIK);
+            account.NIK = register.NIK;
+            account.Password = HashPassword(register.Password.ToString()).ToString();
+            account.profiling = profiling;
+            conn.Update(account);
+            conn.SaveChanges();
+
+            Education education = conn.Educations.Find(profiling.EducationId);
+            education.UniversityId = register.UniversityId;
+            education.Degree = register.Degree;
+            education.GPA = register.GPA;
+            conn.Update(education);
+            conn.SaveChanges();
+
+            Person person = conn.Persons.Find(register.NIK);
+            person.NIK = register.NIK;
+            person.FirstName = register.FirstName;
+            person.LastName = register.LastName;
+            person.Phone = register.Phone;
+            person.BirthDate = register.BirthDate;
+            person.Salary = register.Salary;
+            person.Email = register.Email;
+            person.account = account;
+            conn.Update(person);
+            return conn.SaveChanges();
+
         }
         public int ChangePassword(ChangePassVM change)
         {
@@ -176,9 +236,9 @@ namespace API.Repository.Data
             else
                 return isupdated;
         }
-        public string GenerateToken(RegisterVM register)
+        public string GenerateToken(LoginVM login)
         {
-            var search = conn.Persons.SingleOrDefault(p => p.Email == register.Email);
+            var search = conn.Persons.SingleOrDefault(p => p.Email == login.Email);
             var searchRole = conn.AccountRoles.SingleOrDefault(p=> p.AccountNIK == search.NIK);
 
 
@@ -189,7 +249,7 @@ namespace API.Repository.Data
                 new Claim("role", searchRole.Roles.RoleName)
 
             };
-            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var signin = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],_configuration["Jwt:Audience"],claims, 
                 signingCredentials:signin, expires: DateTime.UtcNow.AddDays(1));
@@ -199,3 +259,7 @@ namespace API.Repository.Data
         }
     }
 }
+//if (register.Password.ToString() != "")
+//{
+//    account.Password = HashPassword(register.Password.ToString()).ToString();
+//}

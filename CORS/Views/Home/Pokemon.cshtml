@@ -1,4 +1,8 @@
-﻿<h1>Pokemon</h1>
+﻿@{
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<h1>Pokemon</h1>
 
 <table id="tablePoke" class="table table-hover table-bordered">
     <thead>
@@ -10,7 +14,6 @@
         </tr>
     </thead>
     <tbody id="bodyPoke">
-
     </tbody>
 </table>
 <div class="modal fade" id="modalPoke" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -31,4 +34,4 @@
 </div>
 @section scripts{
     <script src="~/js/Pokemon.js" asp-append-version="true"></script>
- }
+}
